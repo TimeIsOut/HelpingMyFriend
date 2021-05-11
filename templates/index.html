@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex h-300 text-center">
+    <div class="mt-5 d-flex w-50 h-300 p-3 mx-auto flex-column">
+        <h1 class="mt-4 mb-4">Добро пожаловать!</h1>
+        {% if current_user.is_authenticated %}
+        <h4 class="mt-4">Здесь вы можете делиться своими путешествиями</h4>
+        <h4 class="mt-4">Новые маршруты каждый день</h4><br>
+        {% else %}
+        <h5 class="lead mt-4">Делись путешествиями с друзьями</h5>
+        <p class="lead mt-4">
+            <a href="/signup" class="btn btn-lg btn-secondary fw-bold border-white bg-dark">Зарегистрироваться</a>
+            <a href="/login" class="btn btn-lg btn-secondary fw-bold border-white bg-dark">Войти</a>
+        </p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
