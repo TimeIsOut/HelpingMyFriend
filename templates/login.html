@@ -1,24 +1,32 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2 class="text-center">Авторизация</h2>
+    <h2 class="text-center">Авторизация</h2><br>
     <form action="" method="post">
         {{ form.hidden_tag() }}
-        <p>{{ form.login.label }}{{ form.login(type="string") }}</p><br>
+        <div class="d-flex justify-content-center input-group">
+            <span class="input-group-text">Логин</span>
+            {{ form.login(type="string", class="form-control") }}
+        </div>
         {% for error in form.login.errors %}
-            <div class="alert alert-danger" role="alert">
-                {{ error }}
-            </div>
-        {% endfor %}
-        <p>{{ form.password.label }}{{ form.password(type="password") }}</p><br>
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+        {% endfor %}<br>
+        <div class="d-flex justify-content-center input-group">
+            <span class="input-group-text">Пароль</span>
+            {{ form.password(type="password", class='form-control') }}
+        </div>
         {% for error in form.password.errors %}
-            <div class="alert alert-danger" role="alert">
-                {{ error }}
-            </div>
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
         {% endfor %}
         {% if message %}
             <div class="alert alert-danger">{{ message }}</div>
-        {% endif %}
-        {{ form.remember_me() }}{{ form.remember_me.label }}
-        {{ form.submit(type="submit", class="btn btn-dark") }}
+        {% endif %}<br>
+        <div class="d-flex justify-content-around">
+            <div>{{ form.remember_me() }}  {{ form.remember_me.label }}</div>
+            {{ form.submit(type="submit", class="btn btn-dark") }}
+        </div>
     </form>
 {% endblock %}

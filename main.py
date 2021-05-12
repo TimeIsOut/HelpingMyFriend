@@ -1,7 +1,7 @@
 from data import db_session
 from data.users import User
 from flask import Flask, render_template, redirect
-from forms.user_forms import RegisterForm, LoginForm
+from forms.user_forms import RegisterForm, LoginForm, ProfileButtons
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 
 
@@ -62,11 +62,39 @@ def signup():
     return render_template("signup.html", title="Регистрация", form=form)
 
 
+@login_required
+@app.route("/profile", methods=["POST", "GET"])
+def profile():
+    form = ProfileButtons()
+    if form.validate_on_submit():
+        db_sess = db_session.create_session()
+        user = db_sess.query(User).get(current_user.id)
+        if form.submit_change_login.data:
+            user.login = form.new_login.data
+            db_sess.commit()
+            return render_template("profile.html", title="Профиль", form=form,
+                                   message_login=True)
+        elif form.submit_change_password.data:
+            if not user.check_password(form.old_password.data):
+                return render_template("profile.html", title="Профиль", form=form,
+                                       message_password=[False, "Старый пароль неверен"])
+            elif form.new_password.data != form.new_password_repeat.data:
+                return render_template("profile.html", title="Профиль", form=form,
+                                       message_password=[False, "Новые пароли не совпадают"])
+            user.set_password(form.new_password.data)
+            db_sess.commit()
+            return render_template("profile.html", title="Профиль", form=form,
+                                   message_password=[True, "Пароль успешно изменён"])
+    return render_template("profile.html", title="Профиль", form=form)
+
+
+@login_required
 @app.route("/confirm_logout")
 def confirm_logout():
     return render_template("confirm_logout.html", title="Выход")
 
 
+@login_required
 @app.route("/logout")
 def logout():
     logout_user()
