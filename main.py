@@ -1,5 +1,6 @@
 from data import db_session
 from data.users import User
+from data.routes import Route
 from flask import Flask, render_template, redirect
 from forms.user_forms import RegisterForm, LoginForm, ProfileButtons
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
@@ -92,6 +93,16 @@ def profile():
 @app.route("/show_map/<int:id>")
 def show_map(id):
     return render_template("show_map.html", title="Карта", id=id)
+
+
+@login_required
+@app.route("/all_routes")
+def all_routes():
+    db_sess = db_session.create_session()
+    routes = db_sess.query(Route).all()
+    users = db_sess.query(User).all()
+    return render_template("all_routes.html", title="Все маршруты",
+                           r=routes, u=users)
 
 
 @login_required
