@@ -89,6 +89,12 @@ def profile():
 
 
 @login_required
+@app.route("/show_map/<int:id>")
+def show_map(id):
+    return render_template("show_map.html", title="Карта", id=id)
+
+
+@login_required
 @app.route("/confirm_logout")
 def confirm_logout():
     return render_template("confirm_logout.html", title="Выход")
