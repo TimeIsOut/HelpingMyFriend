@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="containter mt-4 mb-4">
+    <h2 class="text-center">Маршрут №{{ r.id }}</h2><br>
+    <table class="container table">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Карта</th>
+                <th>Бюджет</th>
+                <th>Время</th>
+                <th>Примечание</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ r.name }}</td>
+                <td><a class="btn btn-dark" href="/route/{{ r.id }}/map">Показать карту</a></td>
+                <td>{{ r.budget }} руб.</td>
+                <td>{{ r.time_hours }} часов</td>
+                <td>{{ r.remarks }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<div>
+    <!-- Подключаем API -->
+    <!-- Подробнее https://tech.yandex.ru/maps/doc/jsapi/2.1/dg/concepts/load-docpage/ -->
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=40d1649f-0493-4b70-98ba-98533de7710b&lang=ru_RU"
+            type="text/javascript"></script>
+    <!-- Создаём контейнер для карты -->
+    <div id="map" style="position: absolute; width: 100%; height: 100%"></div>
+
+    <!-- Создаём карту -->
+    <script type="text/javascript" src="../static/js/map_{{ r.id }}.js"></script>
+</div>
+{% endblock %}

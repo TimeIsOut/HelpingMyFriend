@@ -90,9 +90,9 @@ def profile():
 
 
 @login_required
-@app.route("/show_map/<int:id>")
-def show_map(id):
-    return render_template("show_map.html", title="Карта", id=id)
+@app.route("/show_main")
+def show_main():
+    return render_template("show_map.html", title="Карта")
 
 
 @login_required
@@ -103,6 +103,22 @@ def all_routes():
     users = db_sess.query(User).all()
     return render_template("all_routes.html", title="Все маршруты",
                            r=routes, u=users)
+
+
+@login_required
+@app.route("/route/<int:id>")
+def route(id):
+    db_sess = db_session.create_session()
+    route = db_sess.query(Route).filter(Route.id == id).first()
+    return render_template("route.html", title='Просмотр маршрута', r=route)
+
+
+@login_required
+@app.route("/route/<int:id>/map")
+def route_map(id):
+    db_sess = db_session.create_session()
+    route = db_sess.query(Route).filter(Route.id == id).first()
+    return render_template("route_map.html", title="Карта", r=route)
 
 
 @login_required
