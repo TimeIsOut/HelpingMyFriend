@@ -6,7 +6,8 @@
         {{ form.hidden_tag() }}
         <div class="col d-flex flex-column">
             <img src="../static/img/No-image.png" width="400" height="400"><br>
-            <h4>Логин: {{current_user.login}}</h4>
+            <h4>Логин: {{current_user.login}}</h4><br>
+            <a class="btn btn-dark" href="my_routes/{{ current_user.id }}">Показать мои маршруты</a>
         </div>
         <div class="col d-flex flex-column">
             <h4 class="text-center">Редактировать профиль</h4><br>

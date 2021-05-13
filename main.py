@@ -106,6 +106,16 @@ def all_routes():
 
 
 @login_required
+@app.route("/my_routes/<int:id_author>")
+def my_routes(id_author):
+    db_sess = db_session.create_session()
+    routes = db_sess.query(Route).filter(Route.author == id_author).all()
+    users = db_sess.query(User).filter(User.id == id_author)
+    return render_template("my_routes.html", title="Мои маршруты",
+                           r=routes, u=users)
+
+
+@login_required
 @app.route("/route/<int:id>")
 def route(id):
     db_sess = db_session.create_session()

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4 mb-4">
+    <h2 class="text-center">Мои маршруты</h2>
+    <h4 class="text-center">Здесь вы можете посмотреть свои маршруты.</h4><br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Название</th>
+                <th scope="col">Доступ к маршруту</th>
+                <th scope="col">Примечание</th>
+                <th scope="col">Автор</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for route in r %}
+            <tr>
+                <td>{{ route.id }}</td>
+                <td>{{ route.name }}</td>
+                <td><a class="btn btn-dark" href="/route/{{ route.id }}">Показать маршрут</a></td>
+                <td>{{ route.remarks }}</td>
+                <td>{{ u[route.author - 1].login }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
