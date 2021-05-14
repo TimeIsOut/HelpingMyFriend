@@ -3,6 +3,7 @@ from data.users import User
 from data.routes import Route
 from flask import Flask, render_template, redirect
 from forms.user_forms import RegisterForm, LoginForm, ProfileButtons
+from forms.route_forms import AddNewRouteForm
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 
 
@@ -121,6 +122,13 @@ def route(id):
     db_sess = db_session.create_session()
     route = db_sess.query(Route).filter(Route.id == id).first()
     return render_template("route.html", title='Просмотр маршрута', r=route)
+
+
+@login_required
+@app.route("/add_new_route")
+def add_route():
+    form = AddNewRouteForm()
+    return render_template("add_new_route.html", title='Добавление маршрута',form=form)
 
 
 @login_required

@@ -13,3 +13,5 @@ class Route(SqlAlchemyBase):
     remarks = sqlalchemy.Column(sqlalchemy.String)
     author = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('users.id'))
 
+
+

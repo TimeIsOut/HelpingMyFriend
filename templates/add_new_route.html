@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4 mb-4">
+    <h2 class="text-center">Добавление нового маршрута</h2><br>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <div class="d-flex justify-content-center input-group">
+            <span class="input-group-text">Название</span>
+            {{ form.name(type="string", class="form-control") }}
+        </div>
+        {% for error in form.name.errors %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+        {% endfor %}<br>
+        <div class="d-flex justify-content-center input-group">
+            <span class="input-group-text">Время</span>
+            {{ form.time_hours(type="string", class="form-control") }}
+        </div>
+        {% for error in form.time_hours.errors %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+        {% endfor %}<br>
+        <div class="d-flex justify-content-center input-group">
+            <span class="input-group-text">Бюджет</span>
+            {{ form.budget(type="string", class="form-control") }}
+        </div>
+        {% for error in form.budget.errors %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+        {% endfor %}<br>
+        <div class="d-flex justify-content-center input-group">
+            <span class="input-group-text">Заметки</span>
+            {{ form.remarks(type="string", class="form-control") }}
+        </div>
+        {% for error in form.remarks.errors %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+        {% endfor %}<br>
+        <div class="d-flex justify-content-center input-group">
+            <span class="input-group-text">Координаты</span>
+            {{ form.coordinates(type="string", class="form-control") }}
+        </div>
+        {% for error in form.coordinates.errors %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+        {% endfor %}<br>
+        {% if message %}
+            <div class="alert alert-danger">{{ message }}</div>
+        {% endif %}<br>
+        <div class="d-flex justify-content-around">
+            {{ form.submit(type="submit", class="btn btn-dark") }}
+        </div>
+    </form>
+</div>
+{% endblock content %}
