@@ -111,9 +111,8 @@ def all_routes():
 def my_routes(id_author):
     db_sess = db_session.create_session()
     routes = db_sess.query(Route).filter(Route.author == id_author).all()
-    users = db_sess.query(User).filter(User.id == id_author)
     return render_template("my_routes.html", title="Мои маршруты",
-                           r=routes, u=users)
+                           r=routes)
 
 
 @login_required
@@ -125,10 +124,30 @@ def route(id):
 
 
 @login_required
-@app.route("/add_new_route")
+@app.route("/add_new_route", methods=["POST", "GET"])
 def add_route():
     form = AddNewRouteForm()
-    return render_template("add_new_route.html", title='Добавление маршрута',form=form)
+    if form.validate_on_submit():
+        coords = form.coordinates.data.split("\r\n")
+        time = form.time_hours.data if form.time_hours.data else None
+        budget = form.budget.data if form.budget.data else None
+        db_sess = db_session.create_session()
+        route = Route(name=form.name.data,
+                      coordinates=";".join(coords),
+                      time_hours=time,
+                      budget=budget,
+                      remarks=form.remarks.data,
+                      author=current_user.id)
+        coords = [i.split(", ") for i in coords]
+        '''Координаты теперь лежат в формате [[широта1, долгота1], [широта2, долгота2], ...]'''
+        '''Твоя задача - создать файл JS в папке static c именем map_{{id}}.js'''
+        '''И подключить скрипт к route_map.html'''
+        '''Потом просто пишешь мне, я корректирую вёрстку, и дело в шляпе.'''
+        db_sess.add(route)
+        db_sess.commit()
+        return redirect("/all_routes")
+    return render_template("add_new_route.html", title='Добавление маршрута',
+                           form=form)
 
 
 @login_required

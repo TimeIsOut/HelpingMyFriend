@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, BooleanField
+from wtforms import StringField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired
 
 class AddNewRouteForm(FlaskForm):
@@ -7,7 +7,7 @@ class AddNewRouteForm(FlaskForm):
     time_hours = StringField()
     budget = StringField()
     remarks = StringField()
-    coordinates = StringField(validators=[DataRequired()])
+    coordinates = TextAreaField(validators=[DataRequired()])
     submit = SubmitField('Сохранить')
 
 

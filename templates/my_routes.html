@@ -20,7 +20,7 @@
                 <td>{{ route.name }}</td>
                 <td><a class="btn btn-dark" href="/route/{{ route.id }}">Показать маршрут</a></td>
                 <td>{{ route.remarks }}</td>
-                <td>{{ u[route.author - 1].login }}</td>
+                <td>{{ current_user.login }}</td>
             </tr>
             {% endfor %}
         </tbody>

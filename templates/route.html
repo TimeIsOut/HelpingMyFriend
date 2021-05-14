@@ -16,8 +16,16 @@
             <tr>
                 <td>{{ r.name }}</td>
                 <td><a class="btn btn-dark" href="/route/{{ r.id }}/map">Показать карту</a></td>
-                <td>{{ r.budget }} руб.</td>
+                {% if r.budget != None %}
+                <td>{{ r.budget }} тыс. руб.</td>
+                {% else %}
+                <td>Не указано</td>
+                {% endif %}
+                {% if r.time_hours %}
                 <td>{{ r.time_hours }} часов</td>
+                {% else %}
+                <td>Не указано</td>
+                {% endif %}
                 <td>{{ r.remarks }}</td>
             </tr>
         </tbody>

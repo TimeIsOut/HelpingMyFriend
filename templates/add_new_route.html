@@ -24,7 +24,8 @@
         {% endfor %}<br>
         <div class="d-flex justify-content-center input-group">
             <span class="input-group-text">Бюджет</span>
-            {{ form.budget(type="string", class="form-control") }}
+            {{ form.budget(type="string", class="form-control",
+                           placeholder="Указывайте в тысячах...") }}
         </div>
         {% for error in form.budget.errors %}
         <div class="alert alert-danger" role="alert">
@@ -42,8 +43,10 @@
         {% endfor %}<br>
         <div class="d-flex justify-content-center input-group">
             <span class="input-group-text">Координаты</span>
-            {{ form.coordinates(type="string", class="form-control") }}
+            {{ form.coordinates(type="string", class="form-control",
+                                placeholder="Пишите координаты в формате 'широта, долгота', каждая с новой строки...") }}
         </div>
+
         {% for error in form.coordinates.errors %}
         <div class="alert alert-danger" role="alert">
             {{ error }}
@@ -57,4 +60,4 @@
         </div>
     </form>
 </div>
-{% endblock content %}
+{% endblock %}
