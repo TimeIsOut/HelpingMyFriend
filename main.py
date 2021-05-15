@@ -138,11 +138,12 @@ def add_route():
                       budget=budget,
                       remarks=form.remarks.data,
                       author=current_user.id)
-        coords = [i.split(", ") for i in coords]
-        '''Координаты теперь лежат в формате [[широта1, долгота1], [широта2, долгота2], ...]'''
-        '''Твоя задача - создать файл JS в папке static c именем map_{{id}}.js'''
-        '''И подключить скрипт к route_map.html'''
-        '''Потом просто пишешь мне, я корректирую вёрстку, и дело в шляпе.'''
+        coords = [list(map(float, i.split(", "))) for i in coords]
+        new_file = f"static/js/map_{route_id}.js"
+        strings = open("static/js/map_template.js", "r").read().split("\n")
+        strings.insert(6, f"        var coordinates = {coords}")
+        with open(new_file, "a+") as file:
+            file.write("\n".join(strings))
         db_sess.add(route)
         db_sess.commit()
         return redirect("/all_routes")

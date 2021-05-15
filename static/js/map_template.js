@@ -9,10 +9,10 @@
         var myMap = new ymaps.Map("map", {
             // Координаты центра карты.
             // Порядок по умолчнию: «широта, долгота».
-            center: [55.76, 37.64],
+            center: [49.084340, 8.944410],
             // Уровень масштабирования. Допустимые значения:
             // от 0 (весь мир) до 19.
-            zoom: 12,
+            zoom: 3,
             // Элементы управления
             // https://tech.yandex.ru/maps/doc/jsapi/2.1/dg/concepts/controls/standard-docpage/
             controls: [
@@ -37,6 +37,13 @@
             ]
         });
 
+        var startingPoint = new ymaps.Placemark(coordinates[0]);
+        var endingPoint = new ymaps.Placemark(coordinates[coordinates.length - 1])
+        var routeLine = new ymaps.Polyline(coordinates, {}, {strokeWidth: 4, strokeColor: '#8b00ff'});
+        myMap.geoObjects.add(startingPoint);
+        myMap.geoObjects.add(endingPoint);
+        myMap.geoObjects.add(routeLine);
+
         // Добавление метки
         // https://tech.yandex.ru/maps/doc/jsapi/2.1/ref/reference/Placemark-docpage/
         //var myPlacemark = new ymaps.Placemark([55.76, 37.64], {
@@ -48,5 +55,4 @@
 
         // После того как метка была создана, добавляем её на карту.
         //myMap.geoObjects.add(myPlacemark);
-
     }
