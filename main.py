@@ -138,12 +138,14 @@ def add_route():
                       budget=budget,
                       remarks=form.remarks.data,
                       author=current_user.id)
-        coords = [list(map(float, i.split(", "))) for i in coords]
+        coords = [list(map(lambda a: a.strip(" "), i.split(","))) for i in coords]
+        for i in range(len(coords)):
+            coords[i] = [float(coords[i][0]), float(coords[i][1]), coords[i][2]]
         route_id = len(db_sess.query(Route).all()) + 1
         new_file = f"static/js/map_{route_id}.js"
         strings = open("static/js/map_template.js", "r").read().split("\n")
         strings.insert(6, f"        var coordinates = {coords}")
-        with open(new_file, "a+") as file:
+        with open(new_file, "a+", encoding="utf-8") as file:
             file.write("\n".join(strings))
         db_sess.add(route)
         db_sess.commit()

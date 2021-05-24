@@ -44,7 +44,7 @@
         <div class="d-flex justify-content-center input-group">
             <span class="input-group-text">Координаты</span>
             {{ form.coordinates(type="string", class="form-control",
-                                placeholder="Пишите координаты в формате 'широта, долгота', каждая координата с новой строки...") }}
+                                placeholder="Пишите координаты в формате 'широта, долгота, описание', каждая координата с новой строки, если описания нет, после запятой ничего не пишите, но запятая ОБЯЗАТЕЛЬНА!") }}
         </div>
 
         {% for error in form.coordinates.errors %}

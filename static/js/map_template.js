@@ -38,7 +38,7 @@
             ]
         });
         for (var i of coordinates) {
-            myMap.geoObjects.add(new ymaps.Placemark(i, {balloonContent: ''}));
+            myMap.geoObjects.add(new ymaps.Placemark([i[0], i[1]], {balloonContent: i[2]}));
         }
         var routeLine = new ymaps.Polyline(coordinates, {}, {strokeWidth: 4, strokeColor: '#8b00ff'});
         myMap.geoObjects.add(routeLine);
