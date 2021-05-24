@@ -139,6 +139,7 @@ def add_route():
                       remarks=form.remarks.data,
                       author=current_user.id)
         coords = [list(map(float, i.split(", "))) for i in coords]
+        route_id = len(db_sess.query(Route).all()) + 1
         new_file = f"static/js/map_{route_id}.js"
         strings = open("static/js/map_template.js", "r").read().split("\n")
         strings.insert(6, f"        var coordinates = {coords}")

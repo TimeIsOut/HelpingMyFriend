@@ -4,6 +4,7 @@
     ymaps.ready(init);
 
     function init() {
+        var coordinates = [[59.937129, 30.31247], [59.931096, 30.360964], [59.934163, 30.362846], [59.934285, 30.36021], [59.934736, 30.360217]]
 
         // Создание карты.
         // https://tech.yandex.ru/maps/doc/jsapi/2.1/dg/concepts/map-docpage/
@@ -38,7 +39,7 @@
             ]
         });
         for (var i of coordinates) {
-            myMap.geoObjects.add(new ymaps.Placemark(i, {balloonContent: ''}));
+            myMap.geoObjects.add(new ymaps.Placemark(i));
         }
         var routeLine = new ymaps.Polyline(coordinates, {}, {strokeWidth: 4, strokeColor: '#8b00ff'});
         myMap.geoObjects.add(routeLine);
