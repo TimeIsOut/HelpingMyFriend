@@ -1,3 +1,5 @@
+import os
+
 from data import db_session
 from data.users import User
 from data.routes import Route
@@ -21,7 +23,8 @@ def load_user(user_id):
 
 def main():
     db_session.global_init("db/user_data.db")
-    app.run(host="127.0.0.1", port=8080)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
 
 
 @app.route("/")
