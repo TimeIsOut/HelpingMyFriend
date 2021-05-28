@@ -13,10 +13,6 @@ class AddNewRouteForm(FlaskForm):
     :param coordinates: координаты точек маршрута
     :param submit: сохранить форму(маршрут)
     """
-<<<<<<< HEAD
-=======
-
->>>>>>> 32183611eb8d7fefcd55f32d64726ce88f6dab86
     name = StringField(validators=[DataRequired()])
     time_hours = StringField()
     budget = StringField()
